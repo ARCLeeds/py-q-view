@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+
+
+<div class="jumbotron text-center">
+  <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+    <h2>welcome to the home of PY Q View.</h2>
+    <p>A web base queue viewing and job submission application developed for the
+       ARC HPC systems hosted at Leeds University</p>
+  </div>
+
+  <p style="text-align:center;"><img src="static/HPC_decorative_photos.png"
+    class="img"alt="Leeds University Advanced Research Computing Service"
+    width=900px height=100px align="middle"/></p>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+      <h3>Queues</h3>
+        <p>login to view you personal queues</p>
+        <p>view all jobs currently queued on the ARC systems</p>
+
+      </div>
+
+      <div class="col-sm-4">
+        <h3>Job Submission</h3>
+        <p>login to submit jobs to the arc system</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>For more information</h3>
+        <p>The main ARC web page is an excellent source of information for all
+          users of the sysytems here at Leeds</p>
+        <p>You can find further information on the polaris system here </p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
