@@ -36,10 +36,10 @@
 
 {% block navbar %}
 
-<p style="text-align:center;">
-  <img src= {{ url_for('static', filename = "web_banner.png") }} alt="Leeds University Advanced Research Computing Service"
-    title="Header" width=552px height=66px align="middle" border="0">
-</p>
+  <div class="page-header">
+  <img  class="center-block img-responsive" src= {{ url_for('static', filename = "web_banner.png") }} alt="Leeds University Advanced Research Computing Service"
+    title="Header" >
+  </div>
 
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
@@ -72,6 +72,7 @@
                     <li><a href="#">Polaris</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ url_for('main.modules') }}">modules</a></li>
                 <li><a href="#">Job Submission</a></li>
                 <li><a href="#">Info</a></li>
                 <li><a href="#">Bug Reports</a></li>

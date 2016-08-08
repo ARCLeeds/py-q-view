@@ -62,3 +62,11 @@ def polaris():
             waitingJobs.append(line)
     return render_template('polaris.html', runningJobs = runningJobs,
     waitingJobs = waitingJobs)
+
+@main.route('/modules')
+def modules():
+
+    connection = ssh("arc1.leeds.ac.uk", "uitjr", "Jaydee3148")
+    answer = connection.sendCommand('module list')
+
+    return(answer)
