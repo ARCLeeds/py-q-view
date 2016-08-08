@@ -4,6 +4,7 @@ from flask import flash, session
 from . import main
 from ..ssh import ssh
 from ..models import User
+from ..forms import PathForm
 
 @main.before_request
 def before_request():
@@ -114,6 +115,37 @@ def personal_polaris():
 
     return render_template('table.html', machine = "Polaris", runningJobs = runningJobs,
     waitingJobs = waitingJobs)
+
+@main.route('/fileviewer', methods=['GET', 'POST'])
+def fileViewer ():
+    form = PathForm()
+    try:
+        name = current_user.username
+    except AttributeError:
+        return render_template('empty.html', machine = "arc2")
+
+    if not form.path.data :
+        connection = ssh("arc2.leeds.ac.uk", "uitjr", "Jaydee3148")
+        answer = connection.sendCommand('cd /nobackup/' + name + ' && ls -lh')
+
+    else :
+        path = form.path.data
+        connection = ssh("arc2.leeds.ac.uk", "uitjr", "Jaydee3148")
+        answer = connection.sendCommand('cd /nobackup/' + path +' && ls -lh ')
+
+
+    if not answer :
+        return render_template('empty.html', machine = "arc2")
+
+    numberOfLines = len(answer.split("\n"))
+    lines = answer.split("\n")
+    header = lines[0]
+    size = header [6:10]
+    fileList = []
+    for i in range (1, numberOfLines - 1 ):
+        fileList.append(lines[i].split())
+
+    return render_template('file.html',fileList = fileList, machine = "arc2", form = form)
 
 
 def table(answer):

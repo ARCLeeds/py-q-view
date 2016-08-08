@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}PyQView Queues{% endblock %}
+
+{% block page_content %}
+
+<h1>File Viewer</h1>
+
+<p>This page displays the contents of /nobackup/yourusername. If you would like
+  to extend this search deeper into the directory tree enter the path in the
+  search bar </p>
+  
+  {{ wtf.quick_form(form) }}
+<p>These are your files on {{ machine }}</p>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Permissions</th>
+        <th>#</th>
+        <th>User Name</th>
+        <th>User Group</th>
+        <th>Size</th>
+        <th>Month</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+  <tbody>
+      {% for line in fileList %}
+      <tr class="success">
+            <td>{{ line[0] }}</td>
+            <td>{{ line[1] }}</td>
+            <td>{{ line[2] }}</td>
+            <td>{{ line[3] }}</td>
+            <td>{{ line[4] }}</td>
+            <td>{{ line[5] }}</td>
+            <td>{{ line[6] }}</td>
+            <td>{{ line[7] }}</td>
+            <td>{{ line[8] }}</td>
+      </tr>
+     {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+
+
+{% endblock %}
