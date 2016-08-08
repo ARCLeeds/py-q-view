@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}PyQView{% endblock %}
+
+{% block page_content %}
+
+
+<div class="jumbotron text-center">
+  <h1>Sorry, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+    {% if current_user.is_authenticated %}
+    <h2>Your personal queues on {{ machine }} are empty</h2>
+    <p>If you are expecting to see a job here it may be that the scheduler has
+      attempted to run your job and it has been aborted, If you find that this
+      job is in the queue but not displayed here please report it to our team so
+    that we can rectify the problem</p>
+    {% else %}
+    <h2>Username required</h2>
+    <p>if you are already registered you can login, if not register now and
+      we'll have you up and running a.s.a.p</p>
+    {% endif %}
+  </div>
+
+
+{% endblock %}

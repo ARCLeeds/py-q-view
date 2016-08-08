@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}PyQView{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -29,8 +29,8 @@
   marc1,science,super,computer,computing,students">
 
 
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url_for('static', filename='arc.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='arc.ico') }}" type="image/x-icon">
 {% endblock %}
 
 
@@ -65,14 +65,15 @@
                 </li>
 
                 <li class="dropdown"><a class="dropdown-toggle"
-                  data-toggle="dropdown" href="#">Personal Queues <span class="caret"></span></a>
+                  data-toggle="dropdown" href="{{ url_for('main.personal_queues') }}">Personal Queues <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                    <li><a href="#">Arc 1</a></li>
-                    <li><a href="#">Arc 2</a></li>
-                    <li><a href="#">Polaris</a></li>
+                    <li><a href="{{ url_for('main.personal_queues') }}">All Queues</a></li>
+                    <li><a href="{{ url_for('main.personal_arc1') }}">Arc 1</a></li>
+                    <li><a href="{{ url_for('main.personal_arc2') }}">Arc 2</a></li>
+                    <li><a href="{{ url_for('main.personal_polaris') }}">Polaris</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url_for('main.modules') }}">modules</a></li>
+                <li><a href="#">modules</a></li>
                 <li><a href="#">Job Submission</a></li>
                 <li><a href="#">Info</a></li>
                 <li><a href="#">Bug Reports</a></li>
