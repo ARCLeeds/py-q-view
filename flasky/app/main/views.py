@@ -116,6 +116,18 @@ def personal_polaris():
     return render_template('table.html', machine = "Polaris", runningJobs = runningJobs,
     waitingJobs = waitingJobs)
 
+
+@main.route('/modules')
+def modules():
+    return render_template('modules.html')
+
+@main.route('/bugs')
+def bugs():
+    return render_template('bugs.html')
+
+@main.route('/info')
+def info():
+    return render_template('info.html')
 @main.route('/fileviewer', methods=['GET', 'POST'])
 def fileViewer ():
     form = PathForm()
