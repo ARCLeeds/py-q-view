@@ -13,6 +13,8 @@ class Config:
     FLASKY_MAIL_SUBJECT_PREFIX = '[PyQview]'
     FLASKY_MAIL_SENDER = 'PyQView Admin <admin@leeds.ac.uk>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    PYNAME = os.environ.get('PYNAME')
+    PYWORD = os.environ.get('PYWORD')
 
     @staticmethod
     def init_app(app):
