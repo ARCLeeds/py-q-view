@@ -43,6 +43,8 @@ MAIL\_USERNAME = your email
 
 MAIL\_PASSWORD = your password
 
+The MAIL_SERVER variable must also be set to suit your e mail provider in the config.py file.
+
 To run the server move into the flasky directory and run `python3.4 manage.py runserver` this will run the server on the local host in debug mode. It is essential that debug mode is turned off if this server is listening on a public port. 
 
 ##Tutorials on flask that I have used for this project.
