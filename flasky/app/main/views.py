@@ -5,6 +5,7 @@ from . import main
 from ..ssh import ssh
 from ..models import User
 from ..forms import PathForm
+import os
 
 @main.before_request
 def before_request():
@@ -19,7 +20,7 @@ def index():
 @main.route('/queues/arc1')
 def arc1():
 
-    connection = ssh("arc1.leeds.ac.uk", app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("arc1.leeds.ac.uk", os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u "*"')
     runningJobs,waitingJobs = table(answer)
     return render_template('table.html',machine = "arc 1", runningJobs = runningJobs,
@@ -28,7 +29,7 @@ def arc1():
 @main.route('/queues/arc2')
 def arc2():
 
-    connection = ssh("arc2.leeds.ac.uk",app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("arc2.leeds.ac.uk",os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u "*"')
     runningJobs,waitingJobs = table(answer)
     return render_template('table.html', machine = "arc 2", runningJobs = runningJobs,
@@ -37,7 +38,7 @@ def arc2():
 @main.route('/queues/polaris')
 def polaris():
 
-    connection = ssh("polaris.leeds.ac.uk", app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("polaris.leeds.ac.uk", os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u "*"')
     runningJobs,waitingJobs = table(answer)
     return render_template('table.html', machine = "polaris", runningJobs = runningJobs,
@@ -50,7 +51,7 @@ def personal_queues():
     except AttributeError:
         return render_template('empty.html', machine = "all Arc and Polaris Machines")
 
-    connection = ssh("arc2.leeds.ac.uk", app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("arc2.leeds.ac.uk", os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u '+ name)
 
     if not answer :
@@ -68,7 +69,7 @@ def personal_arc1():
     except AttributeError:
         return render_template('empty.html', machine = "Arc 1")
 
-    connection = ssh("arc1.leeds.ac.uk", app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("arc1.leeds.ac.uk", os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u '+ name)
 
     if not answer :
@@ -87,7 +88,7 @@ def personal_arc2():
     except AttributeError:
         return render_template('empty.html', machine = "Arc2")
 
-    connection = ssh("arc2.leeds.ac.uk", app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("arc2.leeds.ac.uk", os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u '+ name)
 
     if not answer :
@@ -105,7 +106,7 @@ def personal_polaris():
     except AttributeError:
         return render_template('empty.html', machine = "Polaris")
 
-    connection = ssh("polaris.leeds.ac.uk",app.config['PYNAME'],app.config['PYWORD'])
+    connection = ssh("polaris.leeds.ac.uk",os.environ.get('PYNAME'),os.environ.get('PYWORD'))
     answer = connection.sendCommand('qstat -u '+ name)
 
     if not answer :
@@ -137,12 +138,12 @@ def fileViewer ():
         return render_template('empty.html', machine = "arc2")
 
     if not form.path.data :
-        connection = ssh("arc2.leeds.ac.uk",app.config['PYNAME'],app.config['PYWORD'])
+        connection = ssh("arc2.leeds.ac.uk",os.environ.get('PYNAME'),os.environ.get('PYWORD'))
         answer = connection.sendCommand('cd /nobackup/' + name + ' && ls -lh')
 
     else :
         path = form.path.data
-        connection = ssh("arc2.leeds.ac.uk",app.config['PYNAME'],app.config['PYWORD'])
+        connection = ssh("arc2.leeds.ac.uk",os.environ.get('PYNAME'),os.environ.get('PYWORD'))
         answer = connection.sendCommand('cd /nobackup/' + path +' && ls -lh ')
 
 
